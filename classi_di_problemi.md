@@ -93,16 +93,6 @@ Domanda Gennaio: 100, Febbraio: 150.
 
 ---
 
-### Tabella Riassuntiva dei Ragionamenti
-
-| Categoria | Verbo Chiave | Ostacolo Principale | Obiettivo Tipico |
-| **Product Mix** | Scegliere | Scarsità risorse | Max Profitto |
-| **Dieta/Blending** | Miscelare | Requisiti qualità | Min Costo |
-| **Trasporto** | Spostare | Costi logistici | Min Costo |
-| **Set Covering** | Coprire | Necessità di presenza | Min Risorse |
-| **Multi-periodo** | Anticipare | Costi di giacenza | Min Costo Totale |
-
-
 ## 6. Il Problema dell'Assegnazione (Assignment)
 È un caso speciale del problema del trasporto, dove devi accoppiare $N$ risorse a $N$ compiti in modo biunivoco (1-a-1).
 
