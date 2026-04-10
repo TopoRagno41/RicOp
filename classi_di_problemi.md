@@ -96,9 +96,86 @@ Domanda Gennaio: 100, Febbraio: 150.
 ### Tabella Riassuntiva dei Ragionamenti
 
 | Categoria | Verbo Chiave | Ostacolo Principale | Obiettivo Tipico |
-| :--- | :--- | :--- | :--- |
 | **Product Mix** | Scegliere | Scarsità risorse | Max Profitto |
 | **Dieta/Blending** | Miscelare | Requisiti qualità | Min Costo |
 | **Trasporto** | Spostare | Costi logistici | Min Costo |
 | **Set Covering** | Coprire | Necessità di presenza | Min Risorse |
 | **Multi-periodo** | Anticipare | Costi di giacenza | Min Costo Totale |
+
+
+## 6. Il Problema dell'Assegnazione (Assignment)
+È un caso speciale del problema del trasporto, dove devi accoppiare $N$ risorse a $N$ compiti in modo biunivoco (1-a-1).
+
+* **Ragionamento:** Ho $n$ persone e $n$ lavori. Ogni persona ha un'abilità (o un costo) diversa per ogni lavoro. Devo assegnare ogni persona a un solo lavoro e ogni lavoro a una sola persona, spendendo il meno possibile.
+* **Metodo di risoluzione:** Algoritmo Ungarico o Simplesso (le variabili sono binarie: 0 o 1).
+
+### Modellizzazione
+* **Dati:** Matrice dei costi $c_{ij}$ (costo della persona $i$ per il lavoro $j$).
+* **Vincoli:** 1.  Ogni riga deve sommare a 1 (ogni persona ha un lavoro).
+    2.  Ogni colonna deve sommare a 1 (ogni lavoro ha un responsabile).
+* **Funzione Obiettivo:** $\min z = \sum \sum c_{ij} x_{ij}$.
+
+### Esempio Semplice
+3 Tecnici e 3 Interventi.
+* **Dati:** Il Tecnico A costa 10€ per l'Intervento 1, ma 50€ per il 2. Il Tecnico B è l'opposto.
+* **Obiettivo:** Trovare l'incrocio perfetto affinché la somma totale dei costi sia minima.
+
+---
+
+## 7. Il Problema del Taglio (Cutting Stock)
+Fondamentale nell'industria della carta, dell'acciaio o del legno.
+
+* **Ragionamento:** Ho dei rotoli di carta enormi (standard) e i clienti ordinano rotoli più piccoli di varie misure. Come devo tagliare i rotoli grandi per soddisfare gli ordini riducendo al minimo lo scarto di carta che va buttata?
+* **Metodo di risoluzione:** Generazione di colonne (un metodo avanzato del Simplesso).
+
+### Modellizzazione
+* **Dati:** Larghezza rotolo standard ($W$), larghezze richieste dai clienti ($w_i$), quantità ordinata per ogni larghezza ($d_i$).
+* **Vincoli:** La somma dei tagli per ogni misura deve essere $\ge$ alla domanda del cliente.
+* **Funzione Obiettivo:** $\min z = \text{Numero di rotoli standard usati}$ (o Minimizzazione dello scarto totale).
+
+### Esempio Semplice
+Rotolo standard da 100cm. Clienti vogliono: 20 rotoli da 30cm e 30 rotoli da 45cm.
+* **Possibili schemi di taglio:** (30+30+30 e 10 scarto) oppure (45+45 e 10 scarto) oppure (30+45 e 25 scarto).
+* **Ragionamento:** Quanti rotoli uso con lo schema 1 e quanti con lo schema 2?
+
+
+
+---
+
+## 8. Massimo Flusso su Rete (Max Flow)
+Si usa per internet, acquedotti o traffico stradale.
+
+* **Ragionamento:** Immagina una rete di tubi. Ogni tubo ha una capacità massima (litri al secondo). Quanta acqua posso mandare al massimo dal punto di partenza (Sorgente) al punto di arrivo (Pozzo) senza far scoppiare nessun tubo?
+* **Metodo di risoluzione:** Algoritmo di Ford-Fulkerson o Simplesso su reti.
+
+### Modellizzazione
+* **Dati:** Capacità di ogni arco $u_{ij}$ (limite del tubo tra il nodo $i$ e il nodo $j$).
+* **Vincoli:** 1.  **Conservazione del flusso:** In ogni nodo intermedio, l'acqua che entra deve essere uguale a quella che esce.
+    2.  **Capacità:** Il flusso in un tubo non può superare $u_{ij}$.
+* **Funzione Obiettivo:** $\max z = \text{Flusso totale che esce dalla Sorgente}$.
+
+### Esempio Semplice
+Traffico internet tra Milano e Roma passando per Bologna o Firenze.
+* **Dati:** Il cavo Bologna-Roma regge 100GB/s, quello Firenze-Roma 50GB/s.
+* **Obiettivo:** Inviare più dati possibili da Milano.
+
+
+
+---
+
+## 9. Lo Zaino (Knapsack Problem)
+È il classico problema della PL Intera ($x \in \{0, 1\}$).
+
+* **Ragionamento:** Sei un ladro (o un escursionista). Hai uno zaino che regge massimo 20kg. Hai davanti a te oggetti con pesi diversi e valori diversi. Quali metti dentro per avere il massimo valore senza rompere lo zaino?
+* **Metodo di risoluzione:** Branch and Bound o Programmazione Dinamica.
+
+### Modellizzazione
+* **Dati:** Valore oggetto $j$ ($v_j$), peso oggetto $j$ ($w_j$), capacità zaino ($W$).
+* **Vincoli:** Somma pesi degli oggetti scelti $\le W$.
+* **Funzione Obiettivo:** $\max z = \sum v_j x_j$.
+
+### Esempio Semplice
+Oggetto 1: 10kg, valore 60€. Oggetto 2: 20kg, valore 100€. Zaino: 25kg.
+* **Ragionamento:** Non posso prenderli entrambi (30kg > 25kg). Devo scegliere se conviene il primo o il secondo.
+
+---
